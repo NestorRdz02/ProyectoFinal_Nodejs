@@ -3,7 +3,6 @@ const employees = express.Router();
 const db = require('../config/database');
 
 employees.post("/", async (req, res, next) => {
-    //const { pok_name, pok_height, pok_weight, pok_base_experience } = req.body;
     const { employee_name, employee_last_name, employee_phone_number, employee_email, employee_address } = req.body;
     if (employee_name && employee_last_name && employee_phone_number && employee_email && employee_address) {
         let query = "INSERT INTO employees(employee_name, employee_last_name, employee_phone_number, employee_email, employee_address)";
