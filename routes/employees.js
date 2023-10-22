@@ -3,10 +3,11 @@ const employees = express.Router();
 const db = require('../config/database');
 
 employees.post("/", async (req, res, next) => {
-    const { employee_name, employee_last_name, employee_phone_number, employee_email, employee_address } = req.body;
-    if (employee_name && employee_last_name && employee_phone_number && employee_email && employee_address) {
-        let query = "INSERT INTO employees(employee_name, employee_last_name, employee_phone_number, employee_email, employee_address)";
-        query += ` VALUES('${employee_name}', ${employee_last_name}, ${employee_phone_number}, ${employee_email}, ${employee_address})`;
+    const { employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address } = req.body;
+    console.log(employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address);
+    if (employee_name && employee_last_name && employee_phone_number && employee_mail && employee_address) {
+        let query = "INSERT INTO employees(employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address)";
+        query += ` VALUES('${employee_name}', '${employee_last_name}', '${employee_phone_number}', '${employee_mail}', '${employee_address}')`;
         const rows = await db.query(query);
 
         if (rows.affectedRows == 1) {
@@ -28,12 +29,12 @@ employees.delete("/:id([0-9]{1,3})", async (req, res, next) => {
 });
 
 employees.put('/:id([0-9]{1,3})', async (req, res, next) => {
-    const {  employee_name, employee_last_name, employee_phone_number, employee_email, employee_address } = req.body;
+    const {  employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address } = req.body;
 
-    if (employee_name && employee_last_name && employee_phone_number && employee_email && employee_address) {
-        let query = `UPDATE employees SET employee_name='${employee_name}', employee_last_name=${employee_last_name},`;
-        query += `employee_phone_number=${employee_phone_number}, employee_email=${employee_email},`;
-        query += `employee_email=${employee_email} WHERE employee_id=${req.params.id};`;
+    if (employee_name && employee_last_name && employee_phone_number && employee_mail && employee_address) {
+        let query = `UPDATE employees SET employee_name='${employee_name}', employee_last_name='${employee_last_name}',`;
+        query += `employee_phone_number='${employee_phone_number}', employee_mail=${employee_mail},`;
+        query += `employee_address=${employee_address} WHERE employee_id=${req.params.id};`;
 
         const rows = await db.query(query);
 
