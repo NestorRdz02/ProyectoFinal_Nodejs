@@ -1,18 +1,27 @@
 window.onload = init;
 var headers = {'Content-Type': 'application/json'};
-var url = "http://localhost:3000";
+var urlAPI = "http://localhost:3000";
 
 async function addEmployee() {
+    var urlAPI = "http://localhost:3000";
     var name = document.getElementById('employeeName').value;
     var lastName = document.getElementById('employeeLastName').value;
     var phone = document.getElementById('employeePhone').value;
     var email = document.getElementById('employeeEmail').value;
     var address = document.getElementById('employeeAddress').value;
 
+    console.log("Name:", name);
+    console.log("Last Name:", lastName);
+    console.log("Phone:", phone);
+    console.log("Email:", email);
+    console.log("Address:", address);
     try {
-        const response = await fetch('/employees', {
+        const response = await fetch(`${urlAPI}/employees/`, {
             method: 'post',
-            body: JSON.stringify({
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({  // Convert the object to a JSON string
                 employee_name: name,
                 employee_last_name: lastName,
                 employee_phone_number: phone,
@@ -37,7 +46,7 @@ async function updateEmployee() {
     const address = document.getElementById('employeeAddress').value;
 
     try {
-        const response = await fetch(`/employees/${id}`, {
+        const response = await fetch(`${urlAPI}/employees/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,7 +68,7 @@ async function updateEmployee() {
 }
 
 async function deleteEmployee() {
-    const id = document.getElementById('employeeId').value;
+    const id = document.getElementById('${urlAPI}employeeId').value;
 
     try {
         const response = await fetch(`/employees/${id}`, {

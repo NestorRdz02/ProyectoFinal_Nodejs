@@ -14,12 +14,11 @@ const cors = require('./middleware/cors');
 app.use(cors);
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extented: true }));
+app.use(express.urlencoded({ extended: true }));
 
-
+//app.use(auth);
 app.get("/", index);
 app.use("/user", user);
-app.use(auth);
 app.use("/employees", employees);
 app.use(notFound);
 

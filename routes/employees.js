@@ -3,6 +3,7 @@ const employees = express.Router();
 const db = require('../config/database');
 
 employees.post("/", async (req, res, next) => {
+    console.log(req.body)
     const { employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address } = req.body;
     console.log(employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address)
     if (employee_name && employee_last_name && employee_phone_number && employee_mail && employee_address) {
@@ -16,7 +17,7 @@ employees.post("/", async (req, res, next) => {
         return res.status(500).json({ code: 500, message: "Ocurrió un error." });
     }
     return res.status(500).json({ code: 500, message: "Campos incompletos" });
-});
+});5
 
 employees.delete("/:id([0-9]{1,3})", async (req, res, next) => {
     const query = `DELETE FROM employees WHERE employee_id=${req.params.id}`;
