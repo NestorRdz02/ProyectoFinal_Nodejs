@@ -21,7 +21,7 @@ async function addEmployee() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({  // Convert the object to a JSON string
+            body: JSON.stringify({  
                 employee_name: name,
                 employee_last_name: lastName,
                 employee_phone_number: phone,
