@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar empleado</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="./js/human_resources.js"></script>
-    <script src="../routes/employees.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../js/human_resources.js"></script>
+    <script src=".../routes/employees.js"></script>
 </head>
 
 <body>
     <div class="container">
+        <div class="form-group">
+            <label for="employeeId">ID del empleado:</label>
+            <input type="text" id="employeeName" placeholder="Nombre del empleado">
+        </div>
         <div class="form-group">
             <label for="employeeName">Nombre:</label>
             <input type="text" id="employeeName" placeholder="Nombre del empleado">
@@ -32,7 +36,7 @@
             <label for="employeeAddress">Dirección:</label>
             <input type="text" id="employeeAddress" placeholder="Dirección del empleado">
         </div>
-        <button onclick="addEmployee()">Añadir Empleado</button>
+        <button onclick="updateEmployee()">Añadir Empleado</button>
         <div class="message" id="message"></div>
     </div>
 
