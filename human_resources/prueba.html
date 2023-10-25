@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="employeeName">Nombre:</label>
+            <input type="text" id="employeeName" placeholder="Nombre del empleado">
+        </div>
+        <div class="form-group">
+            <label for="employeeLastName">Apellido:</label>
+            <input type="text" id="employeeLastName" placeholder="Apellido del empleado">
+        </div>
+        <div class="form-group">
+            <label for="employeePhone">Teléfono:</label>
+            <input type="text" id="employeePhone" placeholder="Número de teléfono">
+        </div>
+        <div class="form-group">
+            <label for="employeeEmail">Correo Electrónico:</label>
+            <input type="text" id="employeeEmail" placeholder="Correo electrónico">
+        </div>
+        <div class="form-group">
+            <label for="employeeAddress">Dirección:</label>
+            <input type="text" id="employeeAddress" placeholder="Dirección del empleado">
+        </div>
+        <button onclick="addEmployee()">Añadir Empleado</button>
+        <button onclick="updateEmployee()">Actualizar Empleado</button>
+        <button onclick="deleteEmployee()">Borrar Empleado</button>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        async function addEmployee() {
+            const name = document.getElementById('employeeName').value;
+            const lastName = document.getElementById('employeeLastName').value;
+            const phone = document.getElementById('employeePhone').value;
+            const email = document.getElementById('employeeEmail').value;
+            const address = document.getElementById('employeeAddress').value;
+
+            try {
+                const response = await fetch('/employees', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        employee_name: name,
+                        employee_last_name: lastName,
+                        employee_phone_number: phone,
+                        employee_mail: email,
+                        employee_address: address
+                    })
+                });
+                const data = await response.json();
+                document.getElementById('message').textContent = data.message;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('message').textContent = 'Error al añadir empleado.';
+            }
+        }
+
+        async function updateEmployee() {
+            const id = document.getElementById('employeeId').value;
+            const name = document.getElementById('employeeName').value;
+            const lastName = document.getElementById('employeeLastName').value;
+            const phone = document.getElementById('employeePhone').value;
+            const email = document.getElementById('employeeEmail').value;
+            const address = document.getElementById('employeeAddress').value;
+
+            try {
+                const response = await fetch(`/employees/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        employee_name: name,
+                        employee_last_name: lastName,
+                        employee_phone_number: phone,
+                        employee_mail: email,
+                        employee_address: address
+                    })
+                });
+                const data = await response.json();
+                document.getElementById('message').textContent = data.message;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('message').textContent = 'Error al actualizar empleado.';
+            }
+        }
+
+        async function deleteEmployee() {
+            const id = document.getElementById('employeeId').value;
+
+            try {
+                const response = await fetch(`/employees/${id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                document.getElementById('message').textContent = data.message;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('message').textContent = 'Error al eliminar empleado.';
+            }
+        }
+    </script>
+</body>
+
+</html>
