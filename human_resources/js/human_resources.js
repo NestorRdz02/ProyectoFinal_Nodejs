@@ -82,35 +82,51 @@ async function deleteEmployee() {
     }
 }
 
+async function searchEmployeeById() {
+    var urlAPI = "http://localhost:3000";
 
-async function searchEmployees() {
-  const employeeName = document.getElementById('employeeName').value;
-  try {
-    const response = await fetch(`${urlAPI}/employees/${employeeName}`);
-    const data = await response.json();
-    const employeesTableBody = document.getElementById('employeesTableBody');
-    employeesTableBody.innerHTML = '';
+    var id = document.getElementById('searchEmployeeId').value;
 
-    if (data.code === 200) {
-      data.message.forEach(employee => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${employee.employee_name}</td>
-          <td>${employee.employee_last_name}</td>
-          <td>${employee.employee_phone_number}</td>
-          <td>${employee.employee_mail}</td>
-          <td>${employee.employee_address}</td>
-        `;
-        employeesTableBody.appendChild(row);
-      });
-
-      document.querySelector('.results').style.display = 'block';
-    } else {
-      document.querySelector('.results').style.display = 'none';
-      alert('Empleado no encontrado.');
+    try {
+        const response = await fetch(`${urlAPI}/employees/${id}`);
+        const data = await response.json();
+        if (data.code === 200) {
+            var employee = data.message[0];
+            document.getElementById('message').textContent = `Employee ID: ${employee.employee_id}, 
+            Name: ${employee.employee_name}, 
+            Last Name: ${employee.employee_last_name}, 
+            Phone: ${employee.employee_phone_number}, 
+            Email: ${employee.employee_mail}, 
+            Address: ${employee.employee_address}`;
+        } else {
+            document.getElementById('message').textContent = data.message;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('message').textContent = 'Error searching for employee.';
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Ocurrió un error al buscar empleados.');
-  }
 }
+
+async function searchEmployeeByName() {
+    var name = document.getElementById('searchEmployeeName').value;
+
+    try {
+        const response = await fetch(`${urlAPI}/employees/${name}`);
+        const data = await response.json();
+        if (data.code === 200) {
+            var employee = data.message[0];
+            document.getElementById('message').textContent = `Employee ID: ${employee.employee_id}, 
+            Name: ${employee.employee_name}, 
+            Last Name: ${employee.employee_last_name}, 
+            Phone: ${employee.employee_phone_number}, 
+            Email: ${employee.employee_mail}, 
+            Address: ${employee.employee_address}`;
+        } else {
+            document.getElementById('message').textContent = data.message;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('message').textContent = 'Error searching for employee.';
+    }
+}
+
