@@ -16,7 +16,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(auth);
+//app.use(auth);
 app.get("/", index);
 app.use("/user", user);
 app.use("/employees", employees);
