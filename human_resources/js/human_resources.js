@@ -38,6 +38,7 @@ async function addEmployee() {
 }
 
 async function updateEmployee() {
+    var urlAPI = "http://localhost:3000";
     var id = document.getElementById('employeeId').value;
     var name = document.getElementById('employeeName').value;
     var lastName = document.getElementById('employeeLastName').value;
@@ -47,7 +48,7 @@ async function updateEmployee() {
 
     try {
         const response = await fetch(`${urlAPI}/employees/${id}`, {
-            method: 'PUT',
+            method: 'put',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -108,6 +109,8 @@ async function searchEmployeeById() {
 }
 
 async function searchEmployeeByName() {
+    var urlAPI = "http://localhost:3000";
+
     var name = document.getElementById('searchEmployeeName').value;
 
     try {

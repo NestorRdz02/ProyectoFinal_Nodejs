@@ -17,7 +17,7 @@ employees.post("/", async (req, res, next) => {
         return res.status(500).json({ code: 500, message: "Ocurrió un error." });
     }
     return res.status(500).json({ code: 500, message: "Campos incompletos" });
-});5
+}); 5
 
 employees.delete("/:id([0-9]{1,3})", async (req, res, next) => {
     const query = `DELETE FROM employees WHERE employee_id=${req.params.id}`;
@@ -30,7 +30,7 @@ employees.delete("/:id([0-9]{1,3})", async (req, res, next) => {
 });
 
 employees.put('/:id([0-9]{1,3})', async (req, res, next) => {
-    const {  employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address } = req.body;
+    const { employee_name, employee_last_name, employee_phone_number, employee_mail, employee_address } = req.body;
 
     if (employee_name && employee_last_name && employee_phone_number && employee_mail && employee_address) {
         let query = `UPDATE employees SET employee_name='${employee_name}', employee_last_name='${employee_last_name}',`;
@@ -76,7 +76,7 @@ employees.get('/:id([0-9]{1,3})', async (req, res, next) => {
 
 employees.get('/:name([A-Za-z]+)', async (req, res, next) => {
     const name = req.params.name;
-    const emply = await db.query("SELECT * FROM employees WHERE employee_name=" + name + ";");
+    const emply = await db.query("SELECT * FROM employees WHERE employee_name = '" + name + "';");
     if (emply.length > 0) {
         return res.status(200).json({ code: 200, message: emply });
     }
