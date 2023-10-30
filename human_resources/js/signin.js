@@ -1,6 +1,10 @@
 window.onload = init;
 
 function init() {
+    document.querySelector('.btn-primary').addEventListener('click', signin);
+}
+
+/*function init() {
     if (!localStorage.getItem("token")) {
         document.querySelector('.btn-secondary').addEventListener('click', function () {
             window.location.href = "login.html";
@@ -10,7 +14,7 @@ function init() {
     else {
         window.location.href = "human_resources.html";
     }
-}
+}*/
 
 function signin() {
     var name = document.getElementById('input-name').value;

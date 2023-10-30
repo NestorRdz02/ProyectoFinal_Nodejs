@@ -15,6 +15,22 @@ function init() {
     }
 }
 
+function loadEmployee() {
+    axios.get(url + "/employee", headers).then(function (res) {
+        console.log(res);
+        displayEmployee(res.data.message);
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+
+function displayEmployee(employee) {
+    var body = document.querySelector("body");
+    for (var i = 0; i < employee.length; i++) {
+        body.innerHTML += `<h3>${employee[i].employee_name}</h3>`;
+    }
+}
+
 async function addEmployee() {
     var urlAPI = "http://localhost:3000";
     var name = document.getElementById('employeeName').value;

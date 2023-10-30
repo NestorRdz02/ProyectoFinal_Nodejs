@@ -1,18 +1,9 @@
 window.onload = init;
 
 function init() {
-    if (!localStorage.getItem("token")) {
-
-        document.querySelector('.btn-secondary').addEventListener('click', function () {
-            window.location.href = "signin.html";
-        });
-
-        document.querySelector('.btn-primary').addEventListener('click', login);
-    }
-    else {
-        window.location.href = "mainScreen.html";
-    }
+    document.querySelector('.btn-primary').addEventListener('click', login);
 }
+
 
 function login() {
     var mail = document.getElementById('input-mail').value;
@@ -31,7 +22,7 @@ function login() {
         console.log(res.data);
         if (res.data.code === 200) {
             localStorage.setItem("token", res.data.message);
-            window.location.href = 'mainScreen.html';
+            window.location.href = 'human_resources.html';
         }
         else {
             alert("Usuario y/o contraseña incorrectos");
