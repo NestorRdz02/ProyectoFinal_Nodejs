@@ -117,13 +117,15 @@ async function searchEmployeeByName() {
         const response = await fetch(`${urlAPI}/employees/${name}`);
         const data = await response.json();
         if (data.code === 200) {
-            var employee = data.message[0];
-            document.getElementById('message').textContent = `Employee ID: ${employee.employee_id}, 
-            Name: ${employee.employee_name}, 
-            Last Name: ${employee.employee_last_name}, 
-            Phone: ${employee.employee_phone_number}, 
-            Email: ${employee.employee_mail}, 
-            Address: ${employee.employee_address}`;
+            for (i = 0; i <= [].concat.apply([], data).length + 1; i++) {
+                var employee = data.message[i];
+                document.getElementById('message').textContent = `Employee ID: ${employee.employee_id}, 
+                Name: ${employee.employee_name}, 
+                Last Name: ${employee.employee_last_name}, 
+                Phone: ${employee.employee_phone_number}, 
+                Email: ${employee.employee_mail}, 
+                Address: ${employee.employee_address}`;
+            }
         } else {
             document.getElementById('message').textContent = data.message;
         }
