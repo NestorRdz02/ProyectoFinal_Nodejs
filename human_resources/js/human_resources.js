@@ -69,11 +69,11 @@ async function updateEmployee() {
 }
 
 async function deleteEmployee() {
-    const id = document.getElementById('${urlAPI}employeeId').value;
-
+    var urlAPI = "http://localhost:3000";
+    var id = document.getElementById('employeeId').value;
     try {
-        const response = await fetch(`/employees/${id}`, {
-            method: 'DELETE'
+        const response = await fetch(`${urlAPI}/employees/${id}`, {
+            method: 'delete'
         });
         const data = await response.json();
         document.getElementById('message').textContent = data.message;
@@ -134,4 +134,3 @@ async function searchEmployeeByName() {
         document.getElementById('message').textContent = 'Error searching for employee.';
     }
 }
-
