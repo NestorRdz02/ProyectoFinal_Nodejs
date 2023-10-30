@@ -2,6 +2,20 @@ window.onload = init;
 var headers = { 'Content-Type': 'application/json' };
 var urlAPI = "http://localhost:3000";
 
+function init() {
+    if (localStorage.getItem("token")) {
+        headers = {
+            headers: {
+                'Authorization': "bearer" + localStorage.getItem("token")
+            }
+        }
+        loadPokemon();
+    }
+    else {
+        window.location.href = "index.html";
+    }
+}
+
 async function addEmployee() {
     var urlAPI = "http://localhost:3000";
     var name = document.getElementById('employeeName').value;
