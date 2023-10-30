@@ -28,6 +28,9 @@ function signin() {
             user_name: name,
             user_mail: mail,
             user_password: pass,
+        },
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
         }
     }).then(function (res) {
         window.location.href = "login.html";

@@ -74,9 +74,9 @@ employees.get('/:id([0-9]{1,3})', async (req, res, next) => {
 });
 
 
-employees.get('/:name([A-Za-z]+)', async (req, res, next) => {
+employees.get('/:name([A-Za-z%20]+)', async (req, res, next) => {
     const name = req.params.name;
-    const emply = await db.query("SELECT * FROM employees WHERE employee_name = '" + name + "';");
+    const emply = await db.query("SELECT * FROM employees WHERE employee_name LIKE '%" + name + "%';");
     if (emply.length > 0) {
         return res.status(200).json({ code: 200, message: emply });
     }

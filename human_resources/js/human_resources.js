@@ -48,6 +48,7 @@ async function addEmployee() {
         const response = await fetch(`${urlAPI}/employees/`, {
             method: 'post',
             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -79,6 +80,7 @@ async function updateEmployee() {
         const response = await fetch(`${urlAPI}/employees/${id}`, {
             method: 'put',
             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -102,6 +104,7 @@ async function deleteEmployee() {
     var id = document.getElementById('employeeId').value;
     try {
         const response = await fetch(`${urlAPI}/employees/${id}`, {
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") },
             method: 'delete'
         });
         const data = await response.json();
@@ -118,7 +121,9 @@ async function searchEmployeeById() {
     var id = document.getElementById('searchEmployeeId').value;
 
     try {
-        const response = await fetch(`${urlAPI}/employees/${id}`);
+        const response = await fetch(`${urlAPI}/employees/${id}`, {
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") }
+        });
         const data = await response.json();
         if (data.code === 200) {
             var employee = data.message[0];
@@ -143,18 +148,22 @@ async function searchEmployeeByName() {
     var name = document.getElementById('searchEmployeeName').value;
 
     try {
-        const response = await fetch(`${urlAPI}/employees/${name}`);
+        const response = await fetch(`${urlAPI}/employees/${name}`, {
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") }
+        });
         const data = await response.json();
         if (data.code === 200) {
-            for (i = 0; i <= [].concat.apply([], data).length + 1; i++) {
-                var employee = data.message[i];
-                document.getElementById('message').textContent = `Employee ID: ${employee.employee_id}, 
+            document.getElementById('message').innerHTML = "";
+            data.message.forEach(employee => {
+                let jump = document.createElement("div");
+                jump.textContent = `Employee ID: ${employee.employee_id}, 
                 Name: ${employee.employee_name}, 
                 Last Name: ${employee.employee_last_name}, 
                 Phone: ${employee.employee_phone_number}, 
                 Email: ${employee.employee_mail}, 
-                Address: ${employee.employee_address}`;
-            }
+                Address: ${employee.employee_address}`
+                document.getElementById('message').append(jump);
+            });
         } else {
             document.getElementById('message').textContent = data.message;
         }
