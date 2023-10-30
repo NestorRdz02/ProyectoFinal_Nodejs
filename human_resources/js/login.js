@@ -10,7 +10,7 @@ function init() {
         document.querySelector('.btn-primary').addEventListener('click', login);
     }
     else {
-        window.location.href = "human_resources.html";
+        window.location.href = "mainScreen.html";
     }
 }
 
@@ -31,7 +31,7 @@ function login() {
         console.log(res.data);
         if (res.data.code === 200) {
             localStorage.setItem("token", res.data.message);
-            window.location.href = 'human_resources.html';
+            window.location.href = 'mainScreen.html';
         }
         else {
             alert("Usuario y/o contraseña incorrectos");

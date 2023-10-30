@@ -9,7 +9,6 @@ function init() {
                 'Authorization': "bearer" + localStorage.getItem("token")
             }
         }
-        loadPokemon();
     }
     else {
         window.location.href = "index.html";

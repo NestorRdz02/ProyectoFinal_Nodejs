@@ -4,25 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management System</title>
-    <link rel="stylesheet" href="../human_resources/styles2.css">
+    <title>Actualizar empleado</title>
+    <link rel="stylesheet" href="../human_resources/style.css">
     <script src="../human_resources/js/human_resources.js"></script>
-    <script src="../routes/employees.js"></script>
-    <script src="ProyectoFinal_Nodejs/routes/employees.js"></script>
+    <script src=".../routes/employees.js"></script>
 </head>
 
 <body>
-    <h2>Search Employee</h2>
-    <div class="form">
-        <input type="text" id="searchEmployeeId" placeholder="Employee ID">
-        <button onclick="searchEmployeeById()">Search by ID</button>
-        <input type="text" id="searchEmployeeName" placeholder="Employee Name">
-        <button onclick="searchEmployeeByName()">Search by Name</button>
+    <div class="container">
+        <div class="form-group">
+            <label for="employeeId">ID del empleado:</label>
+            <input type="text" id="employeeId" placeholder="ID del empleado">
+        </div>
+        <div class="form-group">
+            <label for="employeeName">Nombre:</label>
+            <input type="text" id="employeeName" placeholder="Nombre del empleado">
+        </div>
+        <div class="form-group">
+            <label for="employeeLastName">Apellido:</label>
+            <input type="text" id="employeeLastName" placeholder="Apellido del empleado">
+        </div>
+        <div class="form-group">
+            <label for="employeePhone">Teléfono:</label>
+            <input type="text" id="employeePhone" placeholder="Número de teléfono">
+        </div>
+        <div class="form-group">
+            <label for="employeeEmail">Correo Electrónico:</label>
+            <input type="text" id="employeeEmail" placeholder="Correo electrónico">
+        </div>
+        <div class="form-group">
+            <label for="employeeAddress">Dirección:</label>
+            <input type="text" id="employeeAddress" placeholder="Dirección del empleado">
+        </div>
+        <button onclick="updateEmployee()">Actualizar Empleado</button>
+        <div class="message" id="message"></div>
     </div>
-
-    <div id="message"></div>
-    </div>
-
-</body>
 
 </html>
